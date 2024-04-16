@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add model</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+ integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
+ crossorigin="anonymous">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand"th:href="@{/home}">Model Management System</a>
+    </div>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="nav navbar-nav">
+        <li class="nav-item">
+			<a class = "nav-link" th:href="@{/}">Nhận diện vùng ảnh chứa người</a>
+		</li>
+        <li	class="nav-item">
+			<a class = "nav-link"  th:href="@{/models}">Nhận dạng hành vi </a>
+		</li>
+		<li	class="nav-item">
+			<a class = "nav-link"th:href="@{/models}">Quản lý các mô hình nhận dạng đã huấn luyện</a>
+		</li>
+      </ul>
+      
+    </div>
+  </div>
+</nav>
+<br>
+<br>
+	<div class = "contrainer">
+		<div class="row">
+			<div class="col-lg-6">
+				<h1 class="text-center">Edit Model</h1>
+				<div class="card-body">
+					<form th:action = "@{/models/{id}(id=${model.id})}" th:object = "${model}" method="post">
+						<div class="form-group">
+							<label>Model Type</label>
+							<input
+							type = "text"
+							name = "type"
+							class = "form-control"
+							th:field = "*{type}"
+							placeholder="Emter type of your model"
+							/>
+						</div>
+						<div class="form-group">
+							<label>Model Name</label>
+							<input
+							type = "text"
+							name = "name"
+							class = "form-control"
+							th:field = "*{name}"
+							placeholder="Emter name of your model"
+							/>
+						</div>
+						<div class="form-group">
+							<label>Model Epochs</label>
+							<input
+							type = "number"
+							name = "epochs"
+							class = "form-control"
+							th:field = "*{epochs}"
+							placeholder="Emter epochs "
+							/>
+						</div>
+						<div class="form-group">
+							<label>Model BatchSize</label>
+							<input
+							type = "number"
+							name = "batchSize"
+							class = "form-control"
+							th:field = "*{batchSize}"
+							placeholder="Emter batchSize"
+							/>
+						</div>
+						<div class="form-group">
+							<label>Model LearningRate</label>
+							<input
+							type = "number"
+							step="0.001"
+							name = "learningRate"
+							class = "form-control"
+							th:field = "*{learningRate}"
+							placeholder="Emter learningRate"
+							/>
+						</div>
+						<div class="footer-body" >
+							<button type="submit" class="btn btn-primary">
+								Luu
+							</button>
+						</div>					
+					</form>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>

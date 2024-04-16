@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Model Management System</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+ integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
+ crossorigin="anonymous">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand"th:href="@{/home}">Model Management System</a>
+    </div>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="nav navbar-nav">
+        <li class="nav-item">
+			<a class = "nav-link" th:href="@{/}">Nhận diện vùng ảnh chứa người</a>
+		</li>
+        <li	class="nav-item">
+			<a class = "nav-link"  th:href="@{/models}">Nhận dạng hành vi </a>
+		</li>
+		<li	class="nav-item">
+			<a class = "nav-link"th:href="@{/models}">Quản lý các mô hình nhận dạng đã huấn luyện</a>
+		</li>
+      </ul>
+      
+    </div>
+  </div>
+</nav>
+	<div class = "contrainer">
+		<div class = "text - center">
+			<h1>List ModelTrained</h1>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<a th:href = "@{/models/new} " class="btn btn-primary btn-sm mb-3">Add Model</a>
+			</div>
+		</div>
+		<table class="table table-striped table-bordered">
+			<thead class = "table-dark">
+				<tr>
+					<th>Type</th>
+					<th>Name</th>
+					<th>Epochs</th>
+					<th>Batch Size</th>
+					<th>learningRate</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each = "model: ${models}">
+					<td th:text = "${model.type}"></td>
+					<td th:text = "${model.name}"></td>
+					<td th:text = "${model.epochs}"></td>
+					<td th:text = "${model.batchSize}"></td>
+					<td th:text = "${model.learningRate}"></td>
+					<td>
+						<a th:href = "@{/models/edit/{id}(id=${model.id})}"
+						class = "btn btn-primary">Edit</a>
+						<a th:href = "@{/models/{id}(id=${model.id})}"
+						class = "btn btn-danger">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>
+</body>
+</html>
