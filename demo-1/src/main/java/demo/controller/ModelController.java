@@ -45,7 +45,6 @@ public class ModelController {
 		model.addAttribute("model", modelService.getModelByID(id));
 		return "edit_model";
 	}
-	
 	@PostMapping("models/{id}")
 	public String updateModel(@PathVariable Long id, @ModelAttribute("model") Model md, org.springframework.ui.Model model) {
 		

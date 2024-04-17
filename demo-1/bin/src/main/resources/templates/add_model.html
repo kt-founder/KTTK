@@ -35,33 +35,64 @@
 	<div class = "contrainer">
 		<div class="row">
 			<div class="col-lg-6">
-				<h1 class="text-center">Only Admin can go this page! 
-											Please Log in!</h1>
+				<h1 class="text-center">Add New Model</h1>
 				<div class="card-body">
-					<form >
+					<form th:action = "@{/models}" th:object = "${model}" method="post">
 						<div class="form-group">
-							<label>Username</label>
+							<label>Model Type</label>
 							<input
 							type = "text"
 							name = "type"
 							class = "form-control"
-							placeholder="Emter type of your username"
+							th:field = "*{type}"
+							placeholder="Emter type of your model"
 							/>
 						</div>
 						<div class="form-group">
-							<label>Password</label>
+							<label>Model Name</label>
 							<input
-							type = "password"
+							type = "text"
 							name = "name"
 							class = "form-control"
-							placeholder="Emter name of your password"
+							th:field = "*{name}"
+							placeholder="Emter name of your model"
 							/>
 						</div>
-						
+						<div class="form-group">
+							<label>Model Epochs</label>
+							<input
+							type = "number"
+							name = "epochs"
+							class = "form-control"
+							th:field = "*{epochs}"
+							placeholder="Emter epochs "
+							/>
+						</div>
+						<div class="form-group">
+							<label>Model BatchSize</label>
+							<input
+							type = "number"
+							name = "batchSize"
+							class = "form-control"
+							th:field = "*{batchSize}"
+							placeholder="Emter batchSize"
+							/>
+						</div>
+						<div class="form-group">
+							<label>Model LearningRate</label>
+							<input
+							type = "number"
+							step="0.001"
+							name = "learningRate"
+							class = "form-control"
+							th:field = "*{learningRate}"
+							placeholder="Emter learningRate"
+							/>
+						</div>
 						<div class="footer-body" >
-							<a th:href="@{models}" class="btn btn-primary">
-								Login
-							</a>
+							<button type="submit" class="btn btn-primary">
+								Them
+							</button>
 						</div>					
 					</form>
 				</div>

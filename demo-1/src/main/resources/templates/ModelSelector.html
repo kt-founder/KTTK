@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Model Management System</title>
+<meta charset="ISO-8859-1">
+<title>Select your Model to Recognize</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
  integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
  crossorigin="anonymous">
-
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -32,12 +31,7 @@
 </nav>
 	<div class = "contrainer">
 		<div class = "text - center">
-			<h1>List ModelTrained</h1>
-		</div>
-		<div class="row">
-			<div class="col-lg-3">
-				<a th:href = "@{/models/new} " class="btn btn-primary btn-sm mb-3">Add Model</a>
-			</div>
+			<h1>Select Model From List</h1>
 		</div>
 		<table class="table table-striped table-bordered">
 			<thead class = "table-dark">
@@ -52,17 +46,15 @@
 			</thead>
 			
 			<tbody>
-				<tr th:each = "model:${models}">
+				<tr th:each = "model:${ModelSelector}">
 					<td th:text = "${model.type}"></td>
 					<td th:text = "${model.name}"></td>
 					<td th:text = "${model.epochs}"></td>
 					<td th:text = "${model.batchSize}"></td>
 					<td th:text = "${model.learningRate}"></td>
 					<td>
-						<a th:href = "@{/models/edit/{id}(id=${model.id})}"
-						class = "btn btn-primary">Edit</a>
-						<a th:href = "@{/models/{id}(id=${model.id})}"
-						class = "btn btn-danger">Delete</a>
+						<a th:href="@{/recognition}"
+						class = "btn btn-primary">Go</a>
 					</td>
 				</tr>
 			</tbody>
