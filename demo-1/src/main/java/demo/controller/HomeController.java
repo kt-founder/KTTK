@@ -1,9 +1,11 @@
 package demo.controller;
 
+import org.hibernate.mapping.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,10 +20,10 @@ public class HomeController {
 	private ModelService modelService;
 	private AdminService adminService;
 	
-	public HomeController(ModelService modelService) {
+	public HomeController(ModelService modelService, AdminService adminService) {
 		super();
 		this.modelService = modelService;
-		//this.adminService = adminService;
+		this.adminService = adminService;
 	}
 
 	@GetMapping("/")
@@ -34,7 +36,8 @@ public class HomeController {
 		return "home";
 	}
 	@GetMapping("/login")
-	public String login() {
+	public String login(Model model) {
+		model.addAttribute("admin", new Admin());
 		return "login";
 	}
 	@GetMapping("/detection")
@@ -55,12 +58,21 @@ public class HomeController {
 		model.addAttribute("Modelselector", modelService.getModelByID(id));
 		return "Recognition";
 	}
-	@GetMapping("/login?{username}&{password}")
-	public String checkLogin(ModelMap model, @RequestParam("username")String username, 
-			@RequestParam("password") String password, HttpSession session) {
-		
-		//boolean a = adminService.CheckLogin(username, password);
-		
-		return "models";
-	}
+	 @PostMapping("/login")
+	    public String Login(@ModelAttribute("admin")Admin admin, Model model){
+//		 	System.out.println("In admin");
+//		 	System.out.println(admin.getUsername());
+		 	
+		 	System.out.println(adminService.findAll());
+	        if(adminService.checkAdminByUsername(admin.getUsername())==false){
+	        	//System.out.println(adminService.checkAdminByUsername(admin.getUsername()));
+	            return "redirect:/login?emailwrong";
+	        }
+	        if(adminService.checkPassword(admin.getUsername(),admin.getPassword())){
+	            return "redirect:/models";
+	        }
+
+	        return "redirect:/login?passwordwrong";
+		 	//return "Recognition";
+	    }
 }

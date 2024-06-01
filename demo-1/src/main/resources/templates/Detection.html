@@ -34,12 +34,18 @@
 				<div class="container">
 					<h1 class="jumbotron-heading">Nhận dạng vùng ảnh chứa người</h1>
 					<p class="lead text-muted mb-0">Thêm tệp bạn cần vào đây</p>
-					<img class = "center" src="upload.jpg"alt="	" width="50dp" height="50dp" >
+					<form action="detection/add" method="post" enctype="multipart/form-data">
+					                <div class="input-group">
+					                    <input type="file" class="form-control" id="image" name="image" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required="required" height="400dp"	width="400dp">
+										<!--button class="btn btn-outline-secondary" type="submit" >Submit</button-->
+										               
+					                </div>
+					        </form>
 					<br>
 					<br>
-					<a class = "btn btn-primary">Nhận dạng</a>
+					<a class = "btn btn-primary" onclick="getImage()">Nhận dạng</a>
 					<p class="lead text-muted mb-0">Kết quả:</p>
-					<img class = "center" src="test.jpg" width="400dp" height="400dp" >
+					<div id="imageContainer"></div>
 					<br>
 					<br>
 					<a class = "btn btn-primary center">Dừng</a>
@@ -47,5 +53,21 @@
 		</section>
 		
 	</div>
+	<script>
+	        function getImage() {
+	            // Gửi yêu cầu GET đến API endpoint để lấy ảnh
+	            fetch('/api/getImage')
+	                .then(response => response.blob())
+	                .then(imageBlob => {
+	                    // Tạo URL cho dữ liệu ảnh
+	                    var imageUrl = URL.createObjectURL(imageBlob);
+	
+	                    // Hiển thị ảnh trên giao diện
+	                    var imageContainer = document.getElementById("imageContainer");
+	                    imageContainer.innerHTML = "<img src='" + imageUrl + "' alt='Ảnh từ cơ sở dữ liệu'>";
+	                })
+	                .catch(error => console.error('Error fetching image:', error));
+	        }
+	    </script>
 </body>
 </html>

@@ -1,39 +1,37 @@
 package demo.service.impl;
 
-import java.util.Optional;
+import java.util.List;
 
-import org.hibernate.annotations.processing.Find;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import demo.entity.Admin;
 import demo.repository.AdminRepository;
 import demo.service.AdminService;
 
-public class AdminServiceImpl implements AdminService{
-	
+@Service
+public class AdminServiceImpl implements AdminService {
+
+	@Autowired
 	private AdminRepository adminRepo;
-
-	public AdminServiceImpl(AdminRepository adminRepo) {
-		super();
-		this.adminRepo = adminRepo;
-	}
-	
 	@Override
-	public Boolean Checklogin(String username, String password) {
-		//Optional<Admin> optionalAdmin = findById(username);
-		
-		return null;
+	public Boolean checkAdminByUsername(String username) {
+		Admin admin = adminRepo.findByUsername(username);
+		if(admin == null) return false;
+		return true;
 	}
 
 	@Override
-	public Optional<Admin> findById(String id) {
+	public Boolean checkPassword(String username, String password) {
+		Admin admin = adminRepo.findByUsername(username);
+		if(admin.getPassword().equals(password)) return true;
+		return false;
+	}
+
+	@Override
+	public List<Admin> findAll() {
 		// TODO Auto-generated method stub
-		return Optional.empty();
+		return adminRepo.findAll();
 	}
 
-//	@Override
-//	public Optional<Admin> findById(String id) {
-//		// TODO Auto-generated method stub
-//		return adminRepo.findById(id);
-//	}
-//	
 }

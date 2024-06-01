@@ -2,8 +2,11 @@ package demo.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import demo.entity.Model;
 
+@Service
 public interface ModelService {
 	List<Model> getAllModels();
 	

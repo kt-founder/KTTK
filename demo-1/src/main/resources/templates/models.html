@@ -42,6 +42,7 @@
 		<table class="table table-striped table-bordered">
 			<thead class = "table-dark">
 				<tr>
+					
 					<th>Type</th>
 					<th>Name</th>
 					<th>Epochs</th>
@@ -53,6 +54,7 @@
 			
 			<tbody>
 				<tr th:each = "model:${models}">
+					
 					<td th:text = "${model.type}"></td>
 					<td th:text = "${model.name}"></td>
 					<td th:text = "${model.epochs}"></td>
